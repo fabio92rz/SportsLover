@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Categories;
+use App\Model\Posts;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function about(){
+
+        return view('about');
     }
 }

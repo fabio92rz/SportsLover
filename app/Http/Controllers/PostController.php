@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Posts;
+use App\Model\Categories;
 use App\User;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
@@ -21,10 +22,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Posts::where('active', '1')->orderBy('created_at', 'desc')->paginate(5);
+        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where('active', '1')->orderBy('created_at', 'desc')->take(3)->get();
+        $categories = Categories::orderBy('id', 'desc')->get();
         $title = 'Latest Posts';
 
-        return view('home')->withPosts($posts)->withTitle($title);
+        return view('home')->withPosts($posts)->withTitle($title)->withCategories($categories);
     }
 
     /**
@@ -35,7 +37,8 @@ class PostController extends Controller
     public function create(Request $request)
     {
         //
-        return view('posts.create');
+        $categories = Categories::orderBy('id', 'desc')->get();
+        return view('posts.create')->withCategories($categories);
 
         /**if ($request->user()->can_post()) {
             return view('posts.create');
@@ -58,12 +61,13 @@ class PostController extends Controller
         return redirect('new-post')->withErrors('Title already exists.')->withInput();
         }**/
 
-
         $post = new Posts();
         $post->title = $request->get('title');
         $post->body = $request->get('body');
         $post->slug = str_slug($post->title);
         $post->author_id = $request->user()->id;
+        $post->image = '';
+        $post->category_id = $request->get('category_id');
 
         if ($request->has('save')) {
             $post->active = 0;
@@ -169,5 +173,16 @@ class PostController extends Controller
         }
 
         return redirect('/')->with($data);
+    }
+
+    public function categories(Request $request, $category)
+    {
+
+        $mCategory = Categories::where('category', $category)->get();
+        foreach ($mCategory as $c)
+            $posts = Posts::where('category_id', $c->id)->get();
+
+        var_dump($posts);
+        return view('categories')->withPosts($posts);
     }
 }

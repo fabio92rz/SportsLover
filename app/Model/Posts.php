@@ -18,6 +18,11 @@ class Posts extends Model{
         return $this->hasMany('App\Model\Comments', 'on_post');
     }
 
+    public function category(){
+
+        return $this->hasOne('App\Model\Categories', 'on_post');
+    }
+
     public function author(){
 
         return $this->belongsTo('App\User', 'author_id');

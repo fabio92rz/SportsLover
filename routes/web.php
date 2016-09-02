@@ -23,6 +23,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/about', 'HomeController@about');
+Route::get('/category/{category}', 'PostController@categories');
+
 Route::get('/', 'PostController@index');
 Route::get('/home', ['as' => 'home', 'uses' => 'PostController@index']);
 // check for logged in user

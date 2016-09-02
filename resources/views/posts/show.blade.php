@@ -10,13 +10,14 @@
     @endif
 @endsection
 @section('title-meta')
-    <p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></p>
+    <h3>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></h3>
 @endsection
 @section('content')
     @if($post)
         <div>
             {!! $post->body !!}
         </div>
+        <hr>
         <div>
             <h2>Leave a comment</h2>
         </div>
