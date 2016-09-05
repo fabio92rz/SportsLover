@@ -25,7 +25,7 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
+            <button type="button" class="navbar-toggle" data-toggle="collzapse"
                     data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -44,10 +44,10 @@
                        aria-expanded="false">Sport<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         @foreach($categories as $category)
-                        <li>
-                            <a href="{{url('/category/'.$category->category)}}">{{$category->category}}</a>
-                        </li>
-                            @endforeach
+                            <li>
+                                <a href="{{url('/category/'.$category->category)}}">{{$category->category}}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
                 @if (Auth::guest())
@@ -126,14 +126,14 @@
         </div>
     </div>
 
-<!-- Footer -->
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <p>Copyright &copy; <a href="http://github.com/fabio92rz">Fabio Rizzo</a> <?php echo date("Y"); ?></p>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; <a href="http://github.com/fabio92rz">Fabio Rizzo</a> <?php echo date("Y"); ?></p>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 </div>
 
 <!-- Scripts -->

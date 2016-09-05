@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{ $user->name }}
+    {{ $title }}
 @endsection
 @section('content')
     <div>
@@ -44,7 +44,7 @@
         </ul>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading"><h3>Latest Posts</h3></div>
+        <div class="panel-heading"><h3>Ultimi Post</h3></div>
         <div class="panel-body">
             @if(!empty($latest_posts[0]))
                 @foreach($latest_posts as $latest_post)
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading"><h3>Latest Comments</h3></div>
+        <div class="panel-heading"><h3>Ultimi Commenti</h3></div>
         <div class="list-group">
             @if(!empty($latest_comments[0]))
                 @foreach($latest_comments as $latest_comment)

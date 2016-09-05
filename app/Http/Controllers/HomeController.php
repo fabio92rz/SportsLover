@@ -30,6 +30,7 @@ class HomeController extends Controller
 
     public function about(){
 
-        return view('about');
+        $categories = Categories::orderBy('id', 'desc')->get();
+        return view('about')->withCategories($categories);
     }
 }

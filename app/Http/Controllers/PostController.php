@@ -22,9 +22,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where('active', '1')->orderBy('created_at', 'desc')->take(3)->get();
+        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->orderBy('created_at', 'desc')->take(3)->get();
         $categories = Categories::orderBy('id', 'desc')->get();
-        $title = 'Latest Posts';
+        $title = 'Ultimi Post';
 
         return view('home')->withPosts($posts)->withTitle($title)->withCategories($categories);
     }
@@ -89,12 +89,15 @@ class PostController extends Controller
     public function show($slug)
     {
         $post = Posts::where('slug',$slug)->first();
+        $categories = Categories::orderBy('id', 'desc')->get();
+
+
         if(!$post)
         {
             return redirect('/')->withErrors('requested page not found');
         }
         $comments = $post->comments;
-        return view('posts.show')->withPost($post)->withComments($comments);
+        return view('posts.show')->withPost($post)->withComments($comments)->withCategories($categories);
     }
 
     /**
@@ -177,12 +180,16 @@ class PostController extends Controller
 
     public function categories(Request $request, $category)
     {
+        $categories = Categories::orderBy('id', 'desc')->get();
 
-        $mCategory = Categories::where('category', $category)->get();
-        foreach ($mCategory as $c)
-            $posts = Posts::where('category_id', $c->id)->get();
+        $mCategory = Categories::where(function ($query) use ($category){
+            $query->where('category', '=', $category);
+            })->get();
 
-        var_dump($posts);
-        return view('categories')->withPosts($posts);
+        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where(function ($query) use ($category){
+            $query->where('category', '=', $category);
+        })->orderBy('created_at', 'desc')->get();
+
+        return view('categories')->withCategories($categories)->withPosts($posts);
     }
 }

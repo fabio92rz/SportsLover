@@ -12,8 +12,6 @@ Use Illuminate\Database\Eloquent\Model;
 
 Class Categories extends Model{
 
-    protected $guarded = [];
-
     public function category(){
 
         return $this->belongsTo('App\Model\Posts', 'on_post');
