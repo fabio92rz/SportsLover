@@ -59,4 +59,7 @@
             </div>
         </div>
     @endforeach
+    <div class="col-md-4">
+        {!! $posts->render() !!}
+    </div>
 @endsection

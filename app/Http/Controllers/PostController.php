@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->orderBy('created_at', 'desc')->take(3)->get();
+        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->orderBy('created_at', 'desc')->paginate(3);
         $categories = Categories::orderBy('id', 'desc')->get();
         $title = 'Ultimi Post';
 
@@ -65,9 +65,10 @@ class PostController extends Controller
         $post->title = $request->get('title');
         $post->body = $request->get('body');
         $post->slug = str_slug($post->title);
-        $post->author_id = $request->user()->id;
         $post->image = '';
+        $post->author_id = $request->user()->id;
         $post->category_id = $request->get('category_id');
+
 
         if ($request->has('save')) {
             $post->active = 0;
@@ -88,9 +89,11 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Posts::where('slug',$slug)->first();
-        $categories = Categories::orderBy('id', 'desc')->get();
+        $post = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where(function ($query) use ($slug){
+            $query->where('slug', '=', $slug);
+        })->first();
 
+        $categories = Categories::orderBy('id', 'desc')->get();
 
         if(!$post)
         {
@@ -182,10 +185,6 @@ class PostController extends Controller
     public function categories(Request $request, $category)
     {
         $categories = Categories::orderBy('id', 'desc')->get();
-
-        $mCategory = Categories::where(function ($query) use ($category){
-            $query->where('category', '=', $category);
-            })->get();
 
         $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where(function ($query) use ($category){
             $query->where('category', '=', $category);

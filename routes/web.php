@@ -29,6 +29,7 @@ Route::get('/category/{category}', 'PostController@categories');
 Route::get('/', 'PostController@index');
 Route::get('/home', ['as' => 'home', 'uses' => 'PostController@index']);
 // check for logged in user
+
 Route::group(['middleware' => ['auth']], function () {
     // show new post form
     Route::get('new-post', 'PostController@create');
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user/{id}/posts', 'UserController@user_posts')->where('id', '[0-9]+');
     // display single post
     Route::get('/{slug}', ['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
+
 });
 
 

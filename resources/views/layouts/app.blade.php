@@ -39,25 +39,25 @@
                 <li>
                     <a href="{{url ('/about')}}">About</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">Sport<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        @foreach($categories as $category)
-                            <li>
-                                <a href="{{url('/category/'.$category->category)}}">{{$category->category}}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
                 @if (Auth::guest())
                     <li>
                         <a href="{{ url('/login') }}">Login</a>
                     </li>
                     <li>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/register') }}">Registrazione</a>
                     </li>
                 @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false">Sport<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach($categories as $category)
+                                <li>
+                                    <a href="{{url('/category/'.$category->category)}}">{{$category->category}}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
@@ -88,8 +88,6 @@
         </div>
     </div>
 </nav>
-
-
 <div class="container">
     <!-- Marketing Icons Section -->
     <div class="row">

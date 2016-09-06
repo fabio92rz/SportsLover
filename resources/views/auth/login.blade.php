@@ -5,7 +5,7 @@
 @section('content')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+    <form class="form-horizontal col-md-10" role="form" method="POST" action="{{ url('/login') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
