@@ -108,9 +108,10 @@ class PostController extends Controller
      */
     public function edit(Request $request, $slug)
     {
+        $categories = Categories::orderBy('id', 'desc')->get();
         $post = Posts::where('slug', $slug)->first();
         if ($post && ($request->user()->id == $post->author_id || $request->user()->is_admin()))
-            return view('posts.edit')->with('post', $post);
+            return view('posts.edit')->with('post', $post)->withCategories($categories);
         else {
             return redirect('/')->withErrors('you have not sufficient permissions');
         }

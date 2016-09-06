@@ -1,47 +1,47 @@
 @extends('layouts.app')
-@section('title')
-    {{ $title }}
-@endsection
 @section('content')
-    <div>
-        <ul class="list-group">
-            <li class="list-group-item">
-                Joined on {{$user->created_at->format('M d,Y \a\t h:i a') }}
-            </li>
-            <li class="list-group-item panel-body">
-                <table class="table-padding">
-                    <style>
-                        .table-padding td{
-                            padding: 3px 8px;
-                        }
-                    </style>
-                    <tr>
-                        <td>Total Posts</td>
-                        <td> {{$posts_count}}</td>
-                        @if($author && $posts_count)
-                            <td><a href="{{ url('/my-all-posts')}}">Show All</a></td>
-                        @endif
-                    </tr>
-                    <tr>
-                        <td>Published Posts</td>
-                        <td>{{$posts_active_count}}</td>
-                        @if($posts_active_count)
-                            <td><a href="{{ url('/user/'.$user->id.'/posts')}}">Show All</a></td>
-                        @endif
-                    </tr>
-                    <tr>
-                        <td>Posts in Draft </td>
-                        <td>{{$posts_draft_count}}</td>
-                        @if($author && $posts_draft_count)
-                            <td><a href="{{ url('my-drafts')}}">Show All</a></td>
-                        @endif
-                    </tr>
-                </table>
-            </li>
-            <li class="list-group-item">
-                Total Comments {{$comments_count}}
-            </li>
-        </ul>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>Il tuo Profilo</h3></div>
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Joined on {{$user->created_at->format('M d,Y \a\t h:i a') }}
+                </li>
+                <li class="list-group-item panel-body">
+                    <table class="table-padding">
+                        <style>
+                            .table-padding td {
+                                padding: 3px 8px;
+                            }
+                        </style>
+                        <tr>
+                            <td>Total Posts</td>
+                            <td> {{$posts_count}}</td>
+                            @if($author && $posts_count)
+                                <td><a href="{{ url('/my-all-posts')}}">Show All</a></td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <td>Published Posts</td>
+                            <td>{{$posts_active_count}}</td>
+                            @if($posts_active_count)
+                                <td><a href="{{ url('/user/'.$user->id.'/posts')}}">Show All</a></td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <td>Posts in Draft</td>
+                            <td>{{$posts_draft_count}}</td>
+                            @if($author && $posts_draft_count)
+                                <td><a href="{{ url('my-drafts')}}">Show All</a></td>
+                            @endif
+                        </tr>
+                    </table>
+                </li>
+                <li class="list-group-item">
+                    Total Comments {{$comments_count}}
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading"><h3>Ultimi Post</h3></div>
@@ -66,7 +66,9 @@
                     <div class="list-group-item">
                         <p>{{ $latest_comment->body }}</p>
                         <p>On {{ $latest_comment->created_at->format('M d,Y \a\t h:i a') }}</p>
-                        <p>On post <a href="{{ url('/'.$latest_comment->post->slug) }}">{{ $latest_comment->post->title }}</a></p>
+                        <p>On post <a
+                                    href="{{ url('/'.$latest_comment->post->slug) }}">{{ $latest_comment->post->title }}</a>
+                        </p>
                     </div>
                 @endforeach
             @else
