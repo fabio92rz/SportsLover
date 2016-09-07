@@ -182,7 +182,7 @@ class PostController extends Controller
         return redirect('/')->with($data);
     }
 
-    public function categories(Request $request, $category)
+    public function categories($category)
     {
         $categories = Categories::orderBy('id', 'desc')->get();
 
@@ -190,11 +190,6 @@ class PostController extends Controller
             $query->where('category', '=', $category);
         })->orderBy('created_at', 'desc')->get();
 
-        $title = Categories::select('category')->where(function ($query) use ($category){
-            $query->where('category', '=', $category);
-        })->get();
-
-
-        return view('categories')->withCategories($categories)->withPosts($posts)->withTitle($title);
+        return view('categories')->withCategories($categories)->withPosts($posts)->withTitle($category);
     }
 }

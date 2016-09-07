@@ -16,6 +16,10 @@ class CommentController extends Controller {
         $input['body'] = $request->input('body');
         $slug = $request->input('slug');
         Comments::create( $input );
-        return redirect($slug)->with('message', 'Comment published');
+        return redirect($slug)->with('message', 'Commento Pubblicato');
+    }
+
+    public function getComment($idPost){
+
     }
 }

@@ -1,11 +1,12 @@
 @extends('layouts.app')
+@section('title')
+    Il Tuo Profilo
+@endsection
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading"><h3>Il tuo Profilo</h3></div>
-        <div>
+        <div class="col-md-12">
             <ul class="list-group">
                 <li class="list-group-item">
-                    Joined on {{$user->created_at->format('M d,Y \a\t h:i a') }}
+                    Registrato il {{$user->created_at->format('M d,Y \a\t h:i a') }}
                 </li>
                 <li class="list-group-item panel-body">
                     <table class="table-padding">
@@ -15,24 +16,24 @@
                             }
                         </style>
                         <tr>
-                            <td>Total Posts</td>
+                            <td>Post Totali</td>
                             <td> {{$posts_count}}</td>
                             @if($author && $posts_count)
-                                <td><a href="{{ url('/my-all-posts')}}">Show All</a></td>
+                                <td><a href="{{ url('/my-all-posts')}}">Mostra Tutti</a></td>
                             @endif
                         </tr>
                         <tr>
-                            <td>Published Posts</td>
+                            <td>Post Pubblicati</td>
                             <td>{{$posts_active_count}}</td>
                             @if($posts_active_count)
-                                <td><a href="{{ url('/user/'.$user->id.'/posts')}}">Show All</a></td>
+                                <td><a href="{{ url('/user/'.$user->id.'/posts')}}">Mostra Tutti</a></td>
                             @endif
                         </tr>
                         <tr>
-                            <td>Posts in Draft</td>
+                            <td>Post Salvati nelle Bozze</td>
                             <td>{{$posts_draft_count}}</td>
                             @if($author && $posts_draft_count)
-                                <td><a href="{{ url('my-drafts')}}">Show All</a></td>
+                                <td><a href="{{ url('my-drafts')}}">Mostra Tutti</a></td>
                             @endif
                         </tr>
                     </table>
@@ -54,7 +55,7 @@
                     </p>
                 @endforeach
             @else
-                <p>You have not written any post till now.</p>
+                <p>Non hai ancora scritto nessun post.</p>
             @endif
         </div>
     </div>
@@ -65,15 +66,15 @@
                 @foreach($latest_comments as $latest_comment)
                     <div class="list-group-item">
                         <p>{{ $latest_comment->body }}</p>
-                        <p>On {{ $latest_comment->created_at->format('M d,Y \a\t h:i a') }}</p>
-                        <p>On post <a
+                        <p>In {{ $latest_comment->created_at->format('M d,Y \a\t h:i a') }}</p>
+                        <p>Nel Post <a
                                     href="{{ url('/'.$latest_comment->post->slug) }}">{{ $latest_comment->post->title }}</a>
                         </p>
                     </div>
                 @endforeach
             @else
                 <div class="list-group-item">
-                    <p>You have not commented till now. Your latest 5 comments will be displayed here</p>
+                    <p>Non hai commentato nessun Post fino ad ora.</p>
                 </div>
             @endif
         </div>

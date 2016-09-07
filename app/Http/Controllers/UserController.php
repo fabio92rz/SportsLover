@@ -19,11 +19,10 @@ class UserController extends Controller {
     {
         //
         $categories = Categories::orderBy('id', 'desc')->get();
-        $posts = Posts::where('author_id',$id)->where('active',1)->orderBy('created_at','desc')->paginate(5);
 
         $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where(function ($query) use ($id){
             $query->where('author_id', '=', $id);
-        })->paginate(3);
+        })->paginate(5);
 
         $title = 'I miei Post';
         return view('posts.myposts')->withPosts($posts)->withTitle($title)->withCategories($categories);
