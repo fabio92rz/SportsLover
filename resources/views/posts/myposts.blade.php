@@ -1,12 +1,10 @@
 @extends('layouts.app')
-@section('title')
-    {{$title}}
-@endsection
-
 @section('content')
+        <div class="panel-heading"><h2>I tuoi Post</h2></div>
     @foreach($posts as $post)
-        <div class="col-md-4">
-            <div class="panel panel-default">
+        <div>
+        <div class="list-group">
+            <div class="list-group-item">
                 <div class="panel-heading">
                     <h4><a href="{{ url('/'.$post->slug) }}">{{ $post->title }}</a></h4>
                     <h5>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
@@ -18,8 +16,9 @@
                 </div>
             </div>
         </div>
+        </div>
     @endforeach
-    <div class="col-md-4">
+    <div class="ccol-md-3 col-lg-offset-5">
         {!! $posts->render() !!}
     </div>
 @endsection

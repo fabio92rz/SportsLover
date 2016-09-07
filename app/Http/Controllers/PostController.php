@@ -72,10 +72,10 @@ class PostController extends Controller
 
         if ($request->has('save')) {
             $post->active = 0;
-            $message = 'Post saved successfully';
+            $message = 'Post salvato correttamente';
         } else {
             $post->active = 1;
-            $message = 'Post published successfully';
+            $message = 'Post pubblicato correttamente';
         }
         $post->save();
         return redirect('edit/' . $post->slug)->withMessage($message);
@@ -190,6 +190,11 @@ class PostController extends Controller
             $query->where('category', '=', $category);
         })->orderBy('created_at', 'desc')->get();
 
-        return view('categories')->withCategories($categories)->withPosts($posts);
+        $title = Categories::select('category')->where(function ($query) use ($category){
+            $query->where('category', '=', $category);
+        })->get();
+
+
+        return view('categories')->withCategories($categories)->withPosts($posts)->withTitle($title);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Ultimi Post
+    {{$title}}
 @endsection
 @section('content')
     @foreach($posts as $post)
