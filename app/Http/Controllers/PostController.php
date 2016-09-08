@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Comments;
 use App\Model\Posts;
 use App\Model\Categories;
 use App\User;
@@ -87,11 +88,15 @@ class PostController extends Controller
      * @param  int $id
      * @return Response
      */
+
     public function show($slug)
     {
-        $post = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where(function ($query) use ($slug){
-            $query->where('slug', '=', $slug);
-        })->first();
+        $post = Posts::where('slug',$slug)->first();
+        if(!$post)
+        {
+            return redirect('/')->withErrors('requested page not found');
+        }
+        $comments = $post->comments;
 
         $categories = Categories::orderBy('id', 'desc')->get();
 
@@ -99,8 +104,9 @@ class PostController extends Controller
         {
             return redirect('/')->withErrors('requested page not found');
         }
-        $comments = $post->comments;
+
         return view('posts.show')->withPost($post)->withComments($comments)->withCategories($categories);
+
     }
 
     /**

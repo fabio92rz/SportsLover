@@ -20,7 +20,7 @@ class Posts extends Model{
 
     public function category(){
 
-        return $this->hasOne('App\Model\Categories', 'on_post');
+        //return $this->hasOne('App\Model\Categories', 'on_post');
     }
 
     public function author(){

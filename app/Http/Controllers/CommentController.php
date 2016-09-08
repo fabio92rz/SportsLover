@@ -18,8 +18,4 @@ class CommentController extends Controller {
         Comments::create( $input );
         return redirect($slug)->with('message', 'Commento Pubblicato');
     }
-
-    public function getComment($idPost){
-
-    }
 }

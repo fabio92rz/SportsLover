@@ -13,7 +13,7 @@
     <h3>{{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
                 href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></h3>
 
-    <h4>Categoria: <a href="{{ url('/category/'.$post->categoryname)}}">{{$post->categoryname}}</a></h4>
+    <h4><a href="{{ url('/category/'.$post->categoryname)}}">{{$post->categoryname}}</a></h4>
 
 @endsection
 @section('content')
