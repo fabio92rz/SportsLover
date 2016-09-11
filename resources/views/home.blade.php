@@ -10,23 +10,30 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slite-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+            <div class="fill" style="background-image:url('http://95.85.23.84/profilePicture/Serie-A-Ball.jpg');"></div>
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+            <div class="fill" style="background-image:url('http://95.85.23.84/profilePicture/nba.jpg');"></div>
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
             <div class="fill"
-                 style="background-image:url('http://95.85.23.84/profilePicture/lanson_wimbledon2015.jpg');"></div>
+                 style="background-image:url('http://95.85.23.84/profilePicture/shutterstock_50770603.jpg');"></div>
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill"
+                 style="background-image:url('http://95.85.23.84/profilePicture/volley1.jpg');"></div>
             <div class="carousel-caption">
             </div>
         </div>
@@ -59,7 +66,7 @@
             </div>
         </div>
     @endforeach
-    <div class="col-md-3 col-lg-offset-5">
+    <div class="col-md-5 col-lg-offset-5">
         {!! $posts->render() !!}
     </div>
 @endsection
