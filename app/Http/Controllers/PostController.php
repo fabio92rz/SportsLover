@@ -91,7 +91,14 @@ class PostController extends Controller
 
     public function show($slug)
     {
+        //$post = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->where(function ($query) use ($slug){
+          //  $query->where('slug', '=', $slug);
+        //})->first();
+
+        //$post2 = Posts::where('slug', $slug)->join('categories', '')
+
         $post = Posts::where('slug',$slug)->first();
+
         if(!$post)
         {
             return redirect('/')->withErrors('requested page not found');
@@ -180,9 +187,9 @@ class PostController extends Controller
         $post = Posts::find($id);
         if ($post && ($post->author_id == $request->user()->id || $request->user()->is_admin())) {
             $post->delete();
-            $data['message'] = 'Post deleted Successfully';
+            $data['message'] = 'Post eliminato correttamente';
         } else {
-            $data['errors'] = 'Invalid Operation. You have not sufficient permissions';
+            $data['errors'] = 'Operazione non permessa, non disponi delle autorizzazioni necessarie';
         }
 
         return redirect('/')->with($data);

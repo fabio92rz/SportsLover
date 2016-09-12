@@ -66,6 +66,9 @@
                                 <a href="{{ url('/new-post') }}">Aggiungi un nuovo Post</a>
                             </li>
                             <li>
+                                <a href="{{url('/new-category/')}}">Gestisci Categorie</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('/user/'.Auth::id().'/posts') }}">I miei Post</a>
                             </li>
 
