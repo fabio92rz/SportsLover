@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostFormRequest;
+use Illuminate\Support\Facades\View;
+use PhpParser\Node\Stmt\Echo_;
 
 
 class CategoryController extends Controller
@@ -29,7 +31,7 @@ class CategoryController extends Controller
     {
 
         $categories = Categories::orderBy('id', 'desc')->get();
-        return view('category.create')->withCategories($categories);
+        return View::make('category.create', array('categories2' => $categories))->withCategories($categories);
     }
 
     public function store(Request $request)
@@ -51,19 +53,16 @@ class CategoryController extends Controller
         return redirect('new-category/')->withMessage($message)->withCategories($categories);
     }
 
-    public function delete($category_id)
+    public function delete($id)
     {
-
-        $id = Input::get('category_id');
-        var_dump($id);
-
-        $category = Categories::find($id);
         $categories = Categories::orderBy('id', 'desc')->get();
-
+        $category = Categories::find($id);
         $category->delete();
-        $message = "Categoria eliminata";
+        $message = "Categoria Eliminata";
 
         return redirect('new-category/')->withMessage($message)->withCategories($categories);
+
+
 
     }
 
@@ -73,14 +72,14 @@ class CategoryController extends Controller
         $category_id = $request->input('id');
         $category = Posts::find($category_id);
 
-            $category->category = $request->get('category');
+        $category->category = $request->get('category');
 
-            if ($request->has('save')) {
-                $message = 'Post saved successfully';
-            } else {
-                $message = 'Post updated successfully';
-            }
-            $category->save();
+        if ($request->has('save')) {
+            $message = 'Post saved successfully';
+        } else {
+            $message = 'Post updated successfully';
+        }
+        $category->save();
 
         return redirect('new-category/')->withMessage($message)->withCategories($categories);
 

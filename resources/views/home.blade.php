@@ -66,7 +66,4 @@
             </div>
         </div>
     @endforeach
-    <div class="col-md-4 col-lg-offset-5">
-        {!! $posts->render() !!}
-    </div>
 @endsection

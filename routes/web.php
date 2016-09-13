@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('new-category', 'CategoryController@create');
     //save new category
     Route::post('store-category', 'CategoryController@store');
+    Route::get('/new-category/{id}',[
+        'uses' => 'CategoryController@delete',
+        'as'   => 'categoryid'
+    ]);
     //Delete category
     Route::get('delete-category/{id}', 'CategoryController@delete');
     //edit category

@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->orderBy('created_at', 'desc')->paginate(3);
+        $posts = Posts::select('*', 'categories.category as categoryname' )->join('categories', 'categories.id', '=', 'posts.category_id')->orderBy('created_at', 'desc')->take(3)->get();
         $categories = Categories::orderBy('id', 'desc')->get();
         $title = 'Ultimi Post';
 
