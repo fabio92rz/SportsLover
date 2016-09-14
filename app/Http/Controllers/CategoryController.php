@@ -53,23 +53,11 @@ class CategoryController extends Controller
         return redirect('new-category/')->withMessage($message)->withCategories($categories);
     }
 
-    public function delete($id)
-    {
-        $categories = Categories::orderBy('id', 'desc')->get();
-        $category = Categories::find($id);
-        $category->delete();
-        $message = "Categoria Eliminata";
-
-        return redirect('new-category/')->withMessage($message)->withCategories($categories);
-
-
-
-    }
-
     public function edit(Request $request)
     {
+
+        $category_id = $request->input('categoryid');
         $categories = Categories::orderBy('id', 'desc')->get();
-        $category_id = $request->input('id');
         $category = Posts::find($category_id);
 
         $category->category = $request->get('category');
@@ -84,5 +72,4 @@ class CategoryController extends Controller
         return redirect('new-category/')->withMessage($message)->withCategories($categories);
 
     }
-
 }

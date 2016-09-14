@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Gestisci Categoria
+    Aggiungi Categoria
 @endsection
 @section('content')
     <form method="post" action='{{ url("/store-category") }}'>
@@ -9,7 +9,6 @@
             <div class="form-group">
                 <select name="categoryid" class="form-control">
                     @foreach($categories2 as $category)
-                        <a href="{!! route('categoryid', ['id'=>$category->id]) !!}"></a>
                         <option value="{{$category->id}}"> {{$category->category}} </option>
                     @endforeach
                 </select>
@@ -18,8 +17,5 @@
                    name="category" class="form-control"/>
         </div>
         <input type="submit" name='publish' class="btn btn-success" value="Aggiungi"/>
-
-        <a href="{{  url('delete-category/'.$category->id)}}" class="btn btn-danger">Elimina</a>
-        <a href="{{  url('edit-category/'.$category->id) }}" class="btn btn-warning">Modifica</a>
     </form>
 @endsection

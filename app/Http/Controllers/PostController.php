@@ -158,6 +158,7 @@ class PostController extends Controller
 
             $post->title = $title;
             $post->body = $request->input('body');
+            $post->category_id = $request->input('category_id');
 
             if ($request->has('save')) {
                 $post->active = 0;
